@@ -59,7 +59,7 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     public List<User> findAllUser(int page, int size) {
-        Sort sort = new Sort(Sort.Direction.ASC, "id");
+        Sort sort = Sort.by(Sort.Direction.ASC, "id");
         Pageable pageable = PageRequest.of(page, size, sort);
         return userRepository.findAll(pageable).getContent();
     }

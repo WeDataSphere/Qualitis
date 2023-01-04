@@ -51,14 +51,14 @@ public class RuleDaoImpl implements RuleDao {
 
     @Override
     public List<Rule> findByProjectWithPage(Project project, int page, int size) {
-        Sort sort = new Sort(Sort.Direction.ASC, "id");
+        Sort sort = Sort.by(Sort.Direction.ASC, "id");
         Pageable pageable = PageRequest.of(page, size, sort);
         return ruleRepository.findByProject(project, pageable).getContent();
     }
 
 //    @Override
 //    public List<Rule> findByRuleMetricWithPage(Long ruleMetricId, int page, int size) {
-//        Sort sort = new Sort(Sort.Direction.ASC, "id");
+//        Sort sort = Sort.by(Sort.Direction.ASC, "id");
 //        Pageable pageable = PageRequest.of(page, size, sort);
 //        return ruleRepository.findByRuleMetricId(ruleMetricId, pageable).getContent();
 //    }

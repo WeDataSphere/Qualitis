@@ -57,14 +57,14 @@ public class TaskResultDaoImpl implements TaskResultDao {
 
     @Override
     public List<Long> findRuleByRuleMetric(Long ruleMetricId, int page, int size) {
-        Sort sort = new Sort(Sort.Direction.ASC, "id");
+        Sort sort = Sort.by(Sort.Direction.ASC, "id");
         Pageable pageable = PageRequest.of(page, size, sort);
         return resultRepository.findRuleByRuleMetricId(ruleMetricId, pageable).getContent();
     }
 
     @Override
     public List<TaskResult> findValuesByRuleMetric(long ruleMetricId, int page, int size) {
-        Sort sort = new Sort(Sort.Direction.DESC, "id");
+        Sort sort = Sort.by(Sort.Direction.DESC, "id");
         Pageable pageable = PageRequest.of(page, size, sort);
         return resultRepository.findValuesByRuleAndRuleMetric(ruleMetricId, pageable).getContent();
     }

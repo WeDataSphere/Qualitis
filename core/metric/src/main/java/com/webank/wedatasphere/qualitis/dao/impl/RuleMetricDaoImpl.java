@@ -22,7 +22,7 @@ public class RuleMetricDaoImpl implements RuleMetricDao {
 
     @Override
     public List<RuleMetric> queryAllRuleMetrics(String subSystemName, String ruleMetricName, String enCode, Integer type, Boolean available, int page, int size) {
-        Sort sort = new Sort(Sort.Direction.ASC, "id");
+        Sort sort = Sort.by(Sort.Direction.ASC, "id");
         Pageable pageable = PageRequest.of(page, size, sort);
         return ruleMetricRepository.queryAll(subSystemName, ruleMetricName, enCode, type, available, pageable).getContent();
     }
@@ -35,7 +35,7 @@ public class RuleMetricDaoImpl implements RuleMetricDao {
     @Override
     public List<RuleMetric> queryRuleMetrics(Integer level, List<Department> departmentList, User user, String subSystemName, String ruleMetricName
         , String enCode, Integer type, Boolean available, int page, int size) {
-        Sort sort = new Sort(Sort.Direction.ASC, "id");
+        Sort sort = Sort.by(Sort.Direction.ASC, "id");
         Pageable pageable = PageRequest.of(page, size, sort);
         return ruleMetricRepository.queryRuleMetrics(level, departmentList, user, subSystemName, ruleMetricName, enCode, type, available, pageable).getContent();
     }
@@ -49,7 +49,7 @@ public class RuleMetricDaoImpl implements RuleMetricDao {
     @Override
     public List<RuleMetric> findWithRuleMetricName(Integer level, List<Department> departmentList,
         User user, String name, int page, int size) {
-        Sort sort = new Sort(Sort.Direction.ASC, "id");
+        Sort sort = Sort.by(Sort.Direction.ASC, "id");
         Pageable pageable = PageRequest.of(page, size, sort);
         return ruleMetricRepository.findWithRuleMetricName(level, departmentList, user, "%".concat(name).concat("%"), pageable).getContent();
     }
@@ -62,7 +62,7 @@ public class RuleMetricDaoImpl implements RuleMetricDao {
 
     @Override
     public List<RuleMetric> findAllRuleMetrics(int page, int size) {
-        Sort sort = new Sort(Sort.Direction.ASC, "id");
+        Sort sort = Sort.by(Sort.Direction.ASC, "id");
         Pageable pageable = PageRequest.of(page, size, sort);
         return ruleMetricRepository.findAll(pageable).getContent();
     }
@@ -75,7 +75,7 @@ public class RuleMetricDaoImpl implements RuleMetricDao {
     @Override
     public List<RuleMetric> findRuleMetrics(Integer level, List<Department> departmentList,
         User user, int page, int size) {
-        Sort sort = new Sort(Sort.Direction.ASC, "id");
+        Sort sort = Sort.by(Sort.Direction.ASC, "id");
         Pageable pageable = PageRequest.of(page, size, sort);
         return ruleMetricRepository.findRuleMetrics(level, departmentList, user, pageable).getContent();
     }

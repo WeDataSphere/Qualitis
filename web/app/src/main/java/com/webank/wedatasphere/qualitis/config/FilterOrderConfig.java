@@ -65,15 +65,6 @@ public class FilterOrderConfig {
     }
 
     @Bean
-    public FilterRegistrationBean characterEncodingFilter() {
-        FilterRegistrationBean registration = new FilterRegistrationBean();
-        registration.setFilter(new CharacterEncodingFilter("UTF-8"));
-        registration.addUrlPatterns("/*");
-        registration.setOrder(1);
-        return registration;
-    }
-
-    @Bean
     public FilterRegistrationBean filterRegistrationBean1() {
         FilterRegistrationBean filterRegistrationBean = new FilterRegistrationBean();
         filterRegistrationBean.setFilter(filter1AuthorizationFilter());

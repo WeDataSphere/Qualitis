@@ -54,7 +54,7 @@ public class ProjectDaoImpl implements ProjectDao {
 
     @Override
     public List<Project> findAllProject(int page, int size) {
-        Sort sort = new Sort(Sort.Direction.ASC, "id");
+        Sort sort = Sort.by(Sort.Direction.ASC, "id");
         Pageable pageable = PageRequest.of(page, size, sort);
         return projectRepository.findAll(pageable).getContent();
     }

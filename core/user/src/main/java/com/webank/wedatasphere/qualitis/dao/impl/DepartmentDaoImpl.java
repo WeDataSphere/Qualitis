@@ -49,7 +49,7 @@ public class DepartmentDaoImpl implements DepartmentDao {
 
     @Override
     public List<Department> findAllDepartment(int page, int size) {
-        Sort sort = new Sort(Sort.Direction.ASC, "id");
+        Sort sort = Sort.by(Sort.Direction.ASC, "id");
         Pageable pageable = PageRequest.of(page, size, sort);
         return departmentRepository.findAll(pageable).getContent();
     }

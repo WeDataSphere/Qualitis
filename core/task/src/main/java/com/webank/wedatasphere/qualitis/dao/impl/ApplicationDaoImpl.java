@@ -66,7 +66,7 @@ public class ApplicationDaoImpl implements ApplicationDao {
 
   @Override
   public List<Application> findByCreateUser(String createUser, Integer page, Integer size) {
-    Sort sort = new Sort(Sort.Direction.DESC, "submitTime");
+    Sort sort = Sort.by(Sort.Direction.DESC, "submitTime");
     Pageable pageable = PageRequest.of(page, size, sort);
     return repository.findByCreateUser(createUser, pageable).getContent();
   }
@@ -78,7 +78,7 @@ public class ApplicationDaoImpl implements ApplicationDao {
 
   @Override
   public List<Application> findByCreateUserAndStatus(String createUser, Integer status, Integer commentType, Integer page, Integer size) {
-    Sort sort = new Sort(Sort.Direction.DESC, "submitTime");
+    Sort sort = Sort.by(Sort.Direction.DESC, "submitTime");
     Pageable pageable = PageRequest.of(page, size, sort);
     return repository.findByCreateUserAndStatus(createUser, status, commentType, pageable).getContent();
   }
@@ -91,7 +91,7 @@ public class ApplicationDaoImpl implements ApplicationDao {
   @Override
   public List<Application> findByCreateUserAndProject(String createUser, Long projectId, Integer page,
       Integer size) {
-    Sort sort = new Sort(Sort.Direction.DESC, "submitTime");
+    Sort sort = Sort.by(Sort.Direction.DESC, "submitTime");
     Pageable pageable = PageRequest.of(page, size, sort);
     return repository.findByCreateUserAndProject(createUser, projectId, pageable).getContent();
   }
@@ -108,7 +108,7 @@ public class ApplicationDaoImpl implements ApplicationDao {
 
   @Override
   public List<Application> findApplicationByUserAndSubmitTimeBetweenPage(String user, String startSubmitDate, String endSubmitDate, int page, int size) {
-    Sort sort = new Sort(Sort.Direction.DESC, "submitTime");
+    Sort sort = Sort.by(Sort.Direction.DESC, "submitTime");
     Pageable pageable = PageRequest.of(page, size, sort);
     return repository.findApplicationByUserAndSubmitTimeBetweenPage(user, startSubmitDate, endSubmitDate, pageable).getContent();
   }
@@ -116,7 +116,7 @@ public class ApplicationDaoImpl implements ApplicationDao {
   @Override
   public List<Application> findApplicationByAdavnceConditions(String user, Long projectId, Integer status, Integer commentType, String startSubmitDate,
       String endSubmitDate, int page, int size) {
-    Sort sort = new Sort(Sort.Direction.DESC, "submitTime");
+    Sort sort = Sort.by(Sort.Direction.DESC, "submitTime");
     Pageable pageable = PageRequest.of(page, size, sort);
     return repository.findApplicationByAdavnceConditions(user, projectId, status, startSubmitDate, endSubmitDate, commentType, pageable).getContent();
   }
@@ -165,7 +165,7 @@ public class ApplicationDaoImpl implements ApplicationDao {
     @Override
     public List<Application> findApplicationByAdavnceConditionsWithDatasource(String userName, String clusterName, String databaseName,
         String tableName, Long projectId, Integer status, Integer commentType, String startTime, String endTime, Integer page, Integer size) {
-      Sort sort = new Sort(Sort.Direction.DESC, "id");
+      Sort sort = Sort.by(Sort.Direction.DESC, "id");
       Pageable pageable = PageRequest.of(page, size, sort);
       return repository.findApplicationByAdavnceConditionsWithDatasource(userName, clusterName, databaseName, tableName, projectId
       , status, commentType, startTime, endTime, pageable).getContent();

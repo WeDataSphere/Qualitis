@@ -254,13 +254,19 @@ project(':core/common') {
     compile('org.apache.commons:commons-compress:1.21'){
       force = true
     }
-    compile('org.yaml:snakeyaml:1.26'){
+    compile('org.yaml:snakeyaml:1.31'){
       force = true
     }
     compile('org.hibernate:hibernate-core:5.4.24.Final'){
       force = true
     }
     compile('org.reflections:reflections:0.9.10'){
+      force = true
+    }
+    compile('com.fasterxml.jackson.core:jackson-databind:2.13.4.1'){
+      force = true
+    }
+    compile('org.apache.avro:avro:1.11.0'){
       force = true
     }
     compile (libs.hiveExec) {

@@ -46,14 +46,14 @@ public class RuleTemplateDaoImpl implements RuleTemplateDao {
 
     @Override
     public List<Template> findAllDefaultTemplate(int page, int size) {
-        Sort sort = new Sort(Sort.Direction.ASC, "id");
+        Sort sort = Sort.by(Sort.Direction.ASC, "id");
         Pageable pageable = PageRequest.of(page, size, sort);
         return templateRepository.findByTemplateType(RuleTemplateTypeEnum.SINGLE_SOURCE_TEMPLATE.getCode(), pageable).getContent();
     }
 
     @Override
     public List<Template> findAllDefaultTemplateByLevel(Integer level, int page, int size) {
-        Sort sort = new Sort(Sort.Direction.ASC, "id");
+        Sort sort = Sort.by(Sort.Direction.ASC, "id");
         Pageable pageable = PageRequest.of(page, size, sort);
         return templateRepository.findByLevel(level, pageable).getContent();
     }
@@ -75,7 +75,7 @@ public class RuleTemplateDaoImpl implements RuleTemplateDao {
 
     @Override
     public List<Template> findAllMultiTemplate(Integer dataSourceTypeCode, int page, int size) {
-        Sort sort = new Sort(Sort.Direction.ASC, "id");
+        Sort sort = Sort.by(Sort.Direction.ASC, "id");
         Pageable pageable = PageRequest.of(page, size, sort);
         return templateRepository.findByTemplateTypeAndParentTemplateIsNull(RuleTemplateTypeEnum.MULTI_SOURCE_TEMPLATE.getCode(), dataSourceTypeCode, pageable).getContent();
     }
@@ -102,7 +102,7 @@ public class RuleTemplateDaoImpl implements RuleTemplateDao {
 
     @Override
     public List<Template> findTemplates(Integer level, Integer type, List<Department> departmentList, List<User> userList, Integer dataSourceTypeId, int page, int size) {
-        Sort sort = new Sort(Sort.Direction.ASC, "id");
+        Sort sort = Sort.by(Sort.Direction.ASC, "id");
         Pageable pageable = PageRequest.of(page, size, sort);
         return templateRepository.findTemplates(level, type, departmentList, userList, dataSourceTypeId, pageable).getContent();
     }

@@ -43,14 +43,14 @@ public class ProjectUserDaoImpl implements ProjectUserDao {
 
     @Override
     public List<ProjectUser> findByUsernameAndPermissionAndProjectType(String username, Integer permission, Integer projectType, int page, int size) {
-        Sort sort = new Sort(Sort.Direction.ASC, "project");
+        Sort sort = Sort.by(Sort.Direction.ASC, "project");
         Pageable pageable = PageRequest.of(page, size, sort);
         return projectUserRepository.findByUserNameAndPermissionAndProjectType(username, permission, projectType, pageable).getContent();
     }
 
     @Override
     public List<ProjectUser> findByUsernameAndPermissionAndProjectType(String username, Integer projectType, int page, int size) {
-        Sort sort = new Sort(Sort.Direction.ASC, "id");
+        Sort sort = Sort.by(Sort.Direction.ASC, "id");
         Pageable pageable = PageRequest.of(page, size, sort);
         return projectUserRepository.findByUserNameAndPermissionAndProjectType(username, projectType, pageable).getContent();
     }
@@ -82,7 +82,7 @@ public class ProjectUserDaoImpl implements ProjectUserDao {
 
     @Override
     public List<ProjectUser> findByProjectPageable(Project project, int page, int size) {
-        Sort sort = new Sort(Sort.Direction.ASC, "userName");
+        Sort sort = Sort.by(Sort.Direction.ASC, "userName");
         Pageable pageable = PageRequest.of(page, size, sort);
         return projectUserRepository.findByProject(project, pageable).getContent();
     }

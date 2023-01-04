@@ -132,7 +132,7 @@ public class UserProxyUserServiceImpl implements UserProxyUserService {
         // Find user proxy user by proxy user
         int page = request.getPage();
         int size = request.getSize();
-        Sort sort = new Sort(Sort.Direction.ASC, "id");
+        Sort sort = Sort.by(Sort.Direction.ASC, "id");
         Pageable pageable = org.springframework.data.domain.PageRequest.of(page, size, sort);
         List<UserProxyUser> userProxyUsers = userProxyUserRepository.findByProxyUser(proxyUserInDb, pageable);
         long total = userProxyUserRepository.countByProxyUser(proxyUserInDb);

@@ -28,7 +28,7 @@ public class ProjectEventDaoImpl implements ProjectEventDao {
 
     @Override
     public List<ProjectEvent> find(int page, int size, Project project, Integer typeId) {
-        Sort sort = new Sort(Direction.DESC, "time");
+        Sort sort = Sort.by(Direction.DESC, "time");
         Pageable pageable = PageRequest.of(page, size, sort);
         return projectEventRepository.findByProject(project, typeId, pageable).getContent();
     }

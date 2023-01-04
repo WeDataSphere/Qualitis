@@ -127,7 +127,7 @@ public class ProxyUserServiceImpl implements ProxyUserService {
         // Query by page and size
         int page = request.getPage();
         int size = request.getSize();
-        Sort sort = new Sort(Sort.Direction.ASC, "id");
+        Sort sort = Sort.by(Sort.Direction.ASC, "id");
         Pageable pageable = org.springframework.data.domain.PageRequest.of(page, size, sort);
         List<ProxyUser> proxyUsers = proxyUserRepository.findAll(pageable).getContent();
         long total = proxyUserRepository.count();

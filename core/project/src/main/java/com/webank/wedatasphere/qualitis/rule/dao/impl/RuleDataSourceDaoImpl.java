@@ -89,7 +89,7 @@ public class RuleDataSourceDaoImpl implements RuleDataSourceDao {
 
     @Override
     public List<Map<String, Object>> findProjectDsByUser(String user, int page, int size) {
-        Sort sort = new Sort(Sort.Direction.ASC, "id");
+        Sort sort = Sort.by(Sort.Direction.ASC, "id");
         Pageable pageable = PageRequest.of(page, size, sort);
         return ruleDataSourceRepository.findProjectDsByUser(user, pageable).getContent();
     }
@@ -101,7 +101,7 @@ public class RuleDataSourceDaoImpl implements RuleDataSourceDao {
 
     @Override
     public List<Rule> findRuleByDataSource(String clusterName, String dbName, String tableName, String colName, String user, int page, int size) {
-        Sort sort = new Sort(Sort.Direction.ASC, "id");
+        Sort sort = Sort.by(Sort.Direction.ASC, "id");
         Pageable pageable = PageRequest.of(page, size, sort);
         return ruleDataSourceRepository.findRuleByDataSource(clusterName, dbName, tableName, colName, user, pageable).getContent();
     }
@@ -118,7 +118,7 @@ public class RuleDataSourceDaoImpl implements RuleDataSourceDao {
 
     @Override
     public List<Map<String, Object>> filterProjectDsByUserPage(String user, String clusterName, String dbName, String tableName, int page, int size) {
-        Sort sort = new Sort(Sort.Direction.ASC, "clusterName", "dbName", "tableName");
+        Sort sort = Sort.by(Sort.Direction.ASC, "clusterName", "dbName", "tableName");
         Pageable pageable = PageRequest.of(page, size, sort);
         return ruleDataSourceRepository.filterProjectDsByUser(user, clusterName, dbName, tableName, pageable).getContent();
     }

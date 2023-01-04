@@ -44,7 +44,7 @@ public class TaskRuleSimpleDaoImpl implements TaskRuleSimpleDao {
 
     @Override
     public List<TaskRuleSimple> findByCreateUserAndProjectId(String createUser, Long projectId, Integer page, Integer size) {
-        Sort sort = new Sort(Sort.Direction.DESC, "submitTime");
+        Sort sort = Sort.by(Sort.Direction.DESC, "submitTime");
         Pageable pageable = PageRequest.of(page, size, sort);
         return taskRuleSimpleRepository.findByCreateUserAndProjectId(createUser, projectId, pageable);
     }

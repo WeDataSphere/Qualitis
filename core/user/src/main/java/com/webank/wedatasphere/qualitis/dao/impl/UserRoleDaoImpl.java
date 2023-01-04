@@ -60,7 +60,7 @@ public class UserRoleDaoImpl implements UserRoleDao {
 
     @Override
     public List<UserRole> findAllUserRole(int page, int size) {
-        Sort sort = new Sort(Sort.Direction.ASC, "user");
+        Sort sort = Sort.by(Sort.Direction.ASC, "user");
         Pageable pageable = PageRequest.of(page, size, sort);
         return userRoleRepository.findAll(pageable).getContent();
     }
