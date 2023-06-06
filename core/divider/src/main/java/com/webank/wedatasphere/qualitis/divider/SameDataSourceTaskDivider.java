@@ -91,8 +91,9 @@ public class SameDataSourceTaskDivider extends AbstractTaskDivider {
                 String tableName = generateTable(rule);
                 String midTableName = database + "." + tableName;
 
+                LOGGER.info("Rule detail list size is: {}", ruleTaskDetails.size());
                 if (ruleTaskDetails.size() < threshold) {
-                    ruleTaskDetails.add(new RuleTaskDetail(rule, midTableName));
+                    LOGGER.info("Adding rules in rule detail list");
                 } else {
                     List<RuleTaskDetail> ruleTaskDetailCopy = new ArrayList<>();
                     ruleTaskDetailCopy.addAll(ruleTaskDetails);
@@ -106,7 +107,9 @@ public class SameDataSourceTaskDivider extends AbstractTaskDivider {
                     }
                     result.add(tmp);
                     ruleTaskDetails = new ArrayList<>();
+                    LOGGER.info("Create new rule detail list");
                 }
+                ruleTaskDetails.add(new RuleTaskDetail(rule, midTableName));
             }
             if (ruleTaskDetails.size() > 0) {
                 DataQualityTask tmp = new DataQualityTask(applicationId, createTime, partition, ruleTaskDetails);
