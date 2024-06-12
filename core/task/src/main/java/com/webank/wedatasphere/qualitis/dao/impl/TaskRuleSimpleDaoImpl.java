@@ -20,7 +20,6 @@ import com.webank.wedatasphere.qualitis.dao.TaskRuleSimpleDao;
 import com.webank.wedatasphere.qualitis.dao.repository.TaskRuleSimpleRepository;
 import com.webank.wedatasphere.qualitis.entity.Task;
 import com.webank.wedatasphere.qualitis.entity.TaskRuleSimple;
-import com.webank.wedatasphere.qualitis.dao.TaskRuleSimpleDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -39,8 +38,13 @@ public class TaskRuleSimpleDaoImpl implements TaskRuleSimpleDao {
     private TaskRuleSimpleRepository taskRuleSimpleRepository;
 
     @Override
+    public List<TaskRuleSimple> findBetweenYesterday(Long ruleId) {
+        return taskRuleSimpleRepository.findBetweenYesterday(ruleId);
+    }
+
+    @Override
     public List<TaskRuleSimple> findByCreateUserAndProjectId(String createUser, Long projectId, Integer page, Integer size) {
-        Sort sort = new Sort(Sort.Direction.DESC, "submitTime");
+        Sort sort = Sort.by(Sort.Direction.DESC, "submitTime");
         Pageable pageable = PageRequest.of(page, size, sort);
         return taskRuleSimpleRepository.findByCreateUserAndProjectId(createUser, projectId, pageable);
     }

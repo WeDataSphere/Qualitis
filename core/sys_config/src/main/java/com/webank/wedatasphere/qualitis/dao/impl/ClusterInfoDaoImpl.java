@@ -59,7 +59,7 @@ public class ClusterInfoDaoImpl implements ClusterInfoDao {
 
     @Override
     public List<ClusterInfo> findAllClusterInfo(int page, int size) {
-        Sort sort = new Sort(Sort.Direction.ASC, "id");
+        Sort sort = Sort.by(Sort.Direction.ASC, "id");
         Pageable pageable = PageRequest.of(page, size, sort);
         return clusterInfoRepository.findAll(pageable).getContent();
     }

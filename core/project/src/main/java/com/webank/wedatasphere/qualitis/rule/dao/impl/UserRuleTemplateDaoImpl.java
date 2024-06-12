@@ -20,7 +20,6 @@ import com.webank.wedatasphere.qualitis.rule.dao.UserRuleTemplateDao;
 import com.webank.wedatasphere.qualitis.rule.dao.repository.UserRuleTemplateRepository;
 import com.webank.wedatasphere.qualitis.rule.entity.Template;
 import com.webank.wedatasphere.qualitis.rule.entity.TemplateUser;
-import com.webank.wedatasphere.qualitis.rule.dao.UserRuleTemplateDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -41,7 +40,7 @@ public class UserRuleTemplateDaoImpl implements UserRuleTemplateDao {
 
     @Override
     public List<Template> findByUserId(Long userId, int page, int size) {
-        Sort sort = new Sort(Sort.Direction.ASC, "id");
+        Sort sort = Sort.by(Sort.Direction.ASC, "id");
         Pageable pageable = PageRequest.of(page, size, sort);
         return userRuleTemplateRepository.findByUserId(userId, pageable).getContent().stream().map(TemplateUser::getTemplate).collect(Collectors.toList());
     }

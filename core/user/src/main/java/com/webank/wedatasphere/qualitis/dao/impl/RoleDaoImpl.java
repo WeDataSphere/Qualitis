@@ -18,8 +18,7 @@ package com.webank.wedatasphere.qualitis.dao.impl;
 
 import com.webank.wedatasphere.qualitis.dao.RoleDao;
 import com.webank.wedatasphere.qualitis.dao.repository.RoleRepository;
-import com.webank.wedatasphere.qualitis.entity.Role;
-import com.webank.wedatasphere.qualitis.dao.RoleDao;
+import com.webank.wedatasphere.qualitis.entity.Department;
 import com.webank.wedatasphere.qualitis.entity.Role;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
@@ -60,7 +59,7 @@ public class RoleDaoImpl implements RoleDao {
 
     @Override
     public List<Role> findAllRole(int page, int size) {
-        Sort sort = new Sort(Sort.Direction.ASC, "id");
+        Sort sort = Sort.by(Sort.Direction.ASC, "id");
         Pageable pageable = PageRequest.of(page, size, sort);
         return roleRepository.findAll(pageable).getContent();
     }
@@ -68,5 +67,15 @@ public class RoleDaoImpl implements RoleDao {
     @Override
     public long countAll() {
         return roleRepository.count();
+    }
+
+    @Override
+    public Role findByDepartment(Department departmentInDb) {
+        return roleRepository.findByDepartment(departmentInDb);
+    }
+
+    @Override
+    public boolean checkTemplate(Role roleInDb) {
+        return roleRepository.checkTemplate(roleInDb.getDepartment()) <= 0;
     }
 }

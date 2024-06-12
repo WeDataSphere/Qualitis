@@ -16,22 +16,19 @@
 
 package com.webank.wedatasphere.qualitis.rule.service;
 
+import com.webank.wedatasphere.qualitis.exception.ClusterInfoNotConfigException;
+import com.webank.wedatasphere.qualitis.exception.PermissionDeniedRequestException;
+import com.webank.wedatasphere.qualitis.exception.TaskNotExistException;
 import com.webank.wedatasphere.qualitis.exception.UnExpectedRequestException;
+import com.webank.wedatasphere.qualitis.metadata.exception.MetaDataAcquireFailedException;
 import com.webank.wedatasphere.qualitis.response.GeneralResponse;
 import com.webank.wedatasphere.qualitis.rule.entity.Rule;
+import com.webank.wedatasphere.qualitis.rule.request.AbstractAddRequest;
 import com.webank.wedatasphere.qualitis.rule.request.AddCustomRuleRequest;
 import com.webank.wedatasphere.qualitis.rule.request.DeleteCustomRuleRequest;
 import com.webank.wedatasphere.qualitis.rule.request.ModifyCustomRuleRequest;
 import com.webank.wedatasphere.qualitis.rule.response.CustomRuleDetailResponse;
 import com.webank.wedatasphere.qualitis.rule.response.RuleResponse;
-import com.webank.wedatasphere.qualitis.exception.UnExpectedRequestException;
-import com.webank.wedatasphere.qualitis.response.GeneralResponse;
-import com.webank.wedatasphere.qualitis.rule.entity.Rule;
-import com.webank.wedatasphere.qualitis.rule.request.AddCustomRuleRequest;
-import com.webank.wedatasphere.qualitis.rule.request.DeleteCustomRuleRequest;
-import com.webank.wedatasphere.qualitis.rule.request.ModifyCustomRuleRequest;
-import org.apache.hadoop.hive.ql.parse.ParseException;
-import org.apache.hadoop.hive.ql.parse.SemanticException;
 
 /**
  * @author howeye
@@ -44,18 +41,31 @@ public interface CustomRuleService {
      * @param request
      * @return
      * @throws UnExpectedRequestException
-     * @throws SemanticException
-     * @throws ParseException
+     * @throws PermissionDeniedRequestException
      */
-    GeneralResponse<RuleResponse> addCustomRule(AddCustomRuleRequest request) throws UnExpectedRequestException, SemanticException, ParseException;
+    GeneralResponse<RuleResponse> addCustomRule(AddCustomRuleRequest request)
+        throws UnExpectedRequestException, PermissionDeniedRequestException;
+
+    /**
+     * Add custom rule for bdp-client
+     * @param request
+     * @param loginUser
+     * @return
+     * @throws UnExpectedRequestException
+     * @throws PermissionDeniedRequestException
+     */
+    GeneralResponse<RuleResponse> addRuleForOuter(AbstractAddRequest request, String loginUser)
+        throws UnExpectedRequestException, PermissionDeniedRequestException;
 
     /**
      * delete custom rule
      * @param request
+     * @param loginUser
      * @return
      * @throws UnExpectedRequestException
+     * @throws PermissionDeniedRequestException
      */
-    GeneralResponse<?> deleteCustomRule(DeleteCustomRuleRequest request) throws UnExpectedRequestException;
+    GeneralResponse<?> deleteCustomRule(DeleteCustomRuleRequest request, String loginUser) throws UnExpectedRequestException, PermissionDeniedRequestException;
 
     /**
      * delete custom rule real
@@ -78,9 +88,34 @@ public interface CustomRuleService {
      * @param request
      * @return
      * @throws UnExpectedRequestException
-     * @throws SemanticException
-     * @throws ParseException
+     * @throws ClusterInfoNotConfigException
+     * @throws TaskNotExistException
+     * @throws MetaDataAcquireFailedException
+     * @throws PermissionDeniedRequestException
      */
-    GeneralResponse<RuleResponse> modifyCustomRule(ModifyCustomRuleRequest request) throws UnExpectedRequestException, SemanticException, ParseException;
+    GeneralResponse<RuleResponse> modifyCustomRule(ModifyCustomRuleRequest request)
+        throws UnExpectedRequestException, ClusterInfoNotConfigException, TaskNotExistException, MetaDataAcquireFailedException, PermissionDeniedRequestException;
 
+    /**
+     * Add rule in one transaction for upload.
+     * @param request
+     * @return
+     * @throws UnExpectedRequestException
+     * @throws MetaDataAcquireFailedException
+     * @throws PermissionDeniedRequestException
+     */
+    GeneralResponse<RuleResponse> addCustomRuleForUpload(AddCustomRuleRequest request)
+        throws UnExpectedRequestException, MetaDataAcquireFailedException, PermissionDeniedRequestException;
+
+    /**
+     * Modify rule in one transaction for upload.
+     * @param modifyRuleRequest
+     * @param userName
+     * @return
+     * @throws UnExpectedRequestException
+     * @throws MetaDataAcquireFailedException
+     * @throws PermissionDeniedRequestException
+     */
+    GeneralResponse<RuleResponse> modifyRuleDetailForOuter(ModifyCustomRuleRequest modifyRuleRequest, String userName)
+        throws UnExpectedRequestException, MetaDataAcquireFailedException, PermissionDeniedRequestException;
 }
